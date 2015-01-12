@@ -27,6 +27,13 @@ typedef enum
     HightBitRate//高清
 }BitRateType;
 
+typedef enum
+{
+    AudioType,
+    LiveType,
+    VideoType,
+}MeidaType;
+
 @protocol PlayerEventsDelegate <NSObject>
 
 /**
@@ -172,6 +179,16 @@ typedef enum
 @property (nonatomic, assign) id<PlayerEventsDelegate> delegate;
 
 @property (nonatomic, assign) id<PlayerDataSource> datasource;
+
+
+/**
+ *  初始化播放器
+ *
+ *  @param mediaType 媒体类型
+ *
+ *  @return
+ */
+- (instancetype)initWithMeidaType:(MeidaType)mediaType;
 
 /**
  *  初始化播放

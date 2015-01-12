@@ -22,10 +22,19 @@
 @property (nonatomic, strong) AVAsset *asset;
 @property (nonatomic, strong) id timeObserver;
 @property (nonatomic, strong) ZYPanelViewController *pannelViewController;
+@property (nonatomic, assign) MeidaType mediaType;
 
 @end
 
 @implementation ZYPlayerViewController
+
+- (instancetype)initWithMeidaType:(MeidaType)mediaType
+{
+    if (self = [super init]) {
+        self.mediaType = mediaType;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

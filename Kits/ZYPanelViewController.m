@@ -90,6 +90,8 @@
     [self.view addSubview:_leftPannelView];
     [self.view addSubview:_topPannelView];
     [self.view addSubview:_rightPannelView];
+    
+    [self startTime];
 }
 
 - (void)viewWillLayoutSubviews
@@ -112,10 +114,11 @@
                                                      name:kSystemVolumeDidChanged
                                                    object:nil];
         
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-        
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
+        if (!self.isPannelHidden) {
+            [[UIApplication sharedApplication] setStatusBarHidden:NO];
+            
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        }
     
     } else{
         self.leftPannelView.hidden = YES;
