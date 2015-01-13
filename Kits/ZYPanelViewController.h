@@ -176,5 +176,40 @@
  */
 - (void)hiddenPannelView;
 
+/**
+ *  启动activityIndicator
+ */
+- (void)startActivityIndicatorAnimation;
+
+/**
+ *  停止activityIndicator
+ */
+- (void)stopActivityIndicatorAnimation;
+
+/**
+ *  当前视频的下载状态
+ *
+ *  @return 当前视频的状态
+ */
+- (BOOL)currentDownloadStateInPlayer;
+
+/**
+ *  当前视频的RSS状态
+ *
+ *  @return 当前视频的RSS状态
+ */
+- (BOOL)currentRSSStateInPlayer;
+
+/**
+ *  当前视频的收藏状态
+ *
+ *  @return 当前视频的收藏状态
+ */
+- (BOOL)currentCollectStateInPlayer;
+
+/**
+ *  刷新下载Button、收藏Button以及RSS Button的状态
+ */
+- (void)refreshBtnState;
 
 @end

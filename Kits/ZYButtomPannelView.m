@@ -61,6 +61,9 @@
             _rssButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [_rssButton addTarget:_supperViewController action:@selector(rssBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             [_rssButton setImage:[UIImage imageNamed:@"landscape_subscribe.png"] forState:UIControlStateNormal];
+            [_rssButton setImage:[UIImage imageNamed:@"landscape_subscribe_press.png"] forState:UIControlStateHighlighted];
+            [_rssButton setImage:[UIImage imageNamed:@"landscape_subscribe_press"] forState:UIControlStateSelected];
+            _rssButton.selected = [self.supperViewController currentRSSStateInPlayer];
             [self addSubview:_rssButton];
         }
 
@@ -79,6 +82,8 @@
         
         _lockButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_lockButton setImage:[UIImage imageNamed:@"landscape_unlock.png"] forState:UIControlStateNormal];
+        [_lockButton setImage:[UIImage imageNamed:@"landscape_lock.png"] forState:UIControlStateHighlighted];
+        [_lockButton setImage:[UIImage imageNamed:@"landscape_lock.png"] forState:UIControlStateSelected];
         [_lockButton addTarget:_supperViewController action:@selector(lockBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_lockButton];
         
@@ -124,6 +129,11 @@
         _audioButton.frame = CGRectMake(0, 0, 0, 0);
         _rssButton.frame =  CGRectMake(0, 0, 0, 0);
     }
+}
+
+- (void)refreshButtomPannelView
+{
+    self.rssButton.selected = [self.supperViewController currentRSSStateInPlayer];
 }
 
 /*

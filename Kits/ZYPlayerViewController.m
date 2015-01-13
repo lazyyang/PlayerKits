@@ -58,7 +58,7 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-     _playerView = [[ZYPlayerView alloc] initWithFrame:self.view.bounds];
+    _playerView = [[ZYPlayerView alloc] initWithFrame:self.view.bounds];
     _player = [[AVPlayer alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
     [_playerView.playerLayer setPlayer:_player];
@@ -146,6 +146,7 @@
     NSLog(@"本机播放完成");
     if ([_delegate respondsToSelector:@selector(playerWillPlayNextMedia)]) {
         [_delegate playerWillPlayNextMedia];
+        [self.pannelViewController refreshBtnState];
     }
 }
 
@@ -221,6 +222,9 @@
     if ([keyPath isEqualToString:kItemplaybackLikelyToKeepUp]) {
         
         NSLog(@"kItemplaybackLikelyToKeepUp");
+        if (self.playerItem.isPlaybackLikelyToKeepUp) {
+            [self.pannelViewController stopActivityIndicatorAnimation];
+        }
         
     } else if ([keyPath isEqualToString:kItemExternalPlaybackActive]){
         
@@ -235,8 +239,10 @@
         NSLog(@"kItemLoadedTimeRanges");
         
     } else if ([keyPath isEqualToString:kItemBufferEmpty]){
-        
         NSLog(@"kItemBufferEmpty");
+        if (self.playerItem.isPlaybackBufferEmpty) {
+            [self.pannelViewController startActivityIndicatorAnimation];
+        }
         
     } else if ([keyPath isEqualToString:kItemBufferFull]){
         

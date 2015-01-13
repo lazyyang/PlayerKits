@@ -69,4 +69,6 @@
  */
 - (id)initWithFrame:(CGRect)frame WithSupperViewController:(id)supperViewController;
 
+- (void)refreshButtomPannelView;
+
 @end

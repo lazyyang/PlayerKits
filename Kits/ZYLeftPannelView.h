@@ -26,4 +26,6 @@
  */
 @property (nonatomic, assign) ZYPanelViewController *supperViewController;
 
+- (void)refreshLeftPannelView;
+
 @end

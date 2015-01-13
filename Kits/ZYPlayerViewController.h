@@ -36,6 +36,8 @@ typedef enum
 
 @protocol PlayerEventsDelegate <NSObject>
 
+@required
+
 /**
  *  播放器已经旋转为竖直状态
  */
@@ -50,6 +52,24 @@ typedef enum
  *  即将播放下一条
  */
 - (void)playerWillPlayNextMedia;
+
+/**
+ *  点击清晰度列表
+ *
+ *  @param bitRateListView 清晰度View
+ *  @param index           行数
+ */
+- (void)bitRateListView:(ZYBitRateListView *)bitRateListView didSelectedRowAtIndex:(NSInteger)index;
+
+/**
+ *  点击选集或换台列表
+ *
+ *  @param anthologyListView 选集或者换台列表
+ *  @param index             行数
+ */
+- (void)anthologyListView:(ZYAnthologyListView *)anthologyListView didSelectedRowAtIndex:(NSInteger)index;
+
+@optional
 
 /**
  *  即将收藏该节目
@@ -70,22 +90,6 @@ typedef enum
  *  即将分享节目
  */
 - (void)playerWillShareMedia;
-
-/**
- *  点击清晰度列表
- *
- *  @param bitRateListView 清晰度View
- *  @param index           行数
- */
-- (void)bitRateListView:(ZYBitRateListView *)bitRateListView didSelectedRowAtIndex:(NSInteger)index;
-
-/**
- *  点击选集或换台列表
- *
- *  @param anthologyListView 选集或者换台列表
- *  @param index             行数
- */
-- (void)anthologyListView:(ZYAnthologyListView *)anthologyListView didSelectedRowAtIndex:(NSInteger)index;
 
 @end
 
@@ -117,13 +121,6 @@ typedef enum
  *  @return 若已缓存则返回YES，否则返回NO
  */
 - (BOOL)downloadStateInPlayerView:(ZYPlayerViewController *)player;
-
-/**
- *  点击选集
- *
- *  @param player
- */
-- (void)anthologyListDidSeletedInPlayerView:(ZYPlayerViewController *)player;
 
 /**
  *  当前播放哪一集

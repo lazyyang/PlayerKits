@@ -87,9 +87,9 @@
 - (void)playerWillPlayNextMedia
 {
     NSLog(@"播放下一条");
-    NSArray *array = @[@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/15/2803309-102-1457.mp4"];
+    NSArray *array = @[@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/15/2803309-102-1457.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4"];
     _currentIndex ++;
-    if (_currentIndex >= 3) {
+    if (_currentIndex >= 6) {
         _currentIndex = 0;
     }
     NSString *url = [array objectAtIndex:_currentIndex];
@@ -100,6 +100,7 @@
 - (void)anthologyListView:(ZYAnthologyListView *)anthologyListView didSelectedRowAtIndex:(NSInteger)index
 {
     NSLog(@"选择了第%d行",index);
+    self.currentIndex = index;
     NSArray *array = @[@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/15/2803309-102-1457.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4"];
     NSString *url = [array objectAtIndex:index];
     [_playerVC playFromSeconds:nil withURL:[NSURL URLWithString:url]];
@@ -142,6 +143,26 @@
     return array;
 }
 
+- (BOOL)collectionStateInPlayerView:(ZYPlayerViewController *)player
+{
+    //返回该条节目的收藏状态
+    NSArray *collectArray = @[@YES,@NO,@NO,@YES,@YES,@NO];
+    return [collectArray[_currentIndex] boolValue];
+}
+
+- (BOOL)downloadStateInPlayerView:(ZYPlayerViewController *)player
+{
+    //返回该条节目的下载状态
+    NSArray *downloadArray = @[@NO,@YES,@YES,@NO,@NO,@YES];
+    return [downloadArray[_currentIndex] boolValue];
+}
+
+- (BOOL)rssStateInPlayerView:(ZYPlayerViewController *)player
+{
+    //返回rss状态
+    NSArray *rssDownloadArray = @[@YES,@YES,@NO,@NO,@NO,@YES];
+    return [rssDownloadArray[_currentIndex] boolValue];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

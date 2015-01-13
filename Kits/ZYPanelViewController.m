@@ -31,6 +31,8 @@
 
 @property (strong, nonatomic) ZYGesture *gestureView;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
+
 @end
 
 @implementation ZYPanelViewController
@@ -46,6 +48,7 @@
     self.rightPannelView = nil;
     self.anthologyListView = nil;
     self.gestureView = nil;
+    self.activityIndicatorView = nil;
 }
 
 - (void)showPannelView
@@ -92,8 +95,13 @@
     self.leftPannelView = [[ZYLeftPannelView alloc] initWithFrame:CGRectZero WithSupperViewController:self];
     self.topPannelView = [[ZYTopPannelView alloc] initWithFrame:CGRectZero WithSupperViewController:self];
     self.rightPannelView = [[ZYRightPannelView alloc] initWithFrame:CGRectZero WithSupperViewController:self];
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.activityIndicatorView.bounds = CGRectMake(0, 0, 30, 30);
+    [self.view addSubview:_activityIndicatorView];
+    [_activityIndicatorView startAnimating];
     self.gestureView = [[ZYGesture alloc] initWithFrame:self.view.bounds WithSupperViewController:self];
     self.gestureView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    
     [self.view addSubview:_gestureView];
     [self.view addSubview:_buttomPannelView];
     [self.view addSubview:_leftPannelView];
@@ -105,10 +113,8 @@
 
 - (void)viewWillLayoutSubviews
 {
+    self.activityIndicatorView.center = self.view.center;
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
-        self.leftPannelView.hidden = NO;
-        self.topPannelView.hidden = NO;
-        self.rightPannelView.hidden = NO;
         self.leftPannelView.frame = CGRectMake(0, self.view.bounds.size.height/2 - 110.0f/2, 40.0f, 110.0f);
         if ([_playerViewController isLiveType]) {
             self.buttomPannelView.frame = CGRectMake(0, self.view.bounds.size.height - 40.0f, self.view.bounds.size.width, 40.0f);
@@ -129,9 +135,11 @@
         
         if (!self.isPannelHidden) {
             [[UIApplication sharedApplication] setStatusBarHidden:NO];
-            
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            self.leftPannelView.hidden = NO;
+            self.topPannelView.hidden = NO;
+            self.rightPannelView.hidden = NO;
         }
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     } else{
         self.leftPannelView.hidden = YES;
@@ -147,11 +155,14 @@
                                                       object:nil];
         
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-
-
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
     }
 }
 
+
+#pragma mark -
+#pragma mark - Pannel Button
 - (void)volumeChanged:(NSNotification *)notif
 {
     float volume = [[[notif userInfo]
@@ -187,13 +198,23 @@
 {
     NSLog(@"rss订阅");
     if ([_playerViewController.delegate respondsToSelector:@selector(playerWillRssMedia)]) {
-        [_playerViewController.delegate playerWillRssMedia];
+        if (button.selected) {
+            button.selected = NO;
+            [_playerViewController.delegate playerWillRssMedia];
+        } else{
+            button.selected = YES;
+            [_playerViewController.delegate playerWillRssMedia];
+        }
     }
 }
 
 - (void)lockBtnClicked:(UIButton *)button
 {
-    NSLog(@"锁频按钮");
+    if (button.selected) {
+        button.selected = NO;
+    } else{
+        button.selected = YES;
+    }
 }
 
 - (void)progessSliderValueChangedBegin:(UISlider *)slider
@@ -272,9 +293,9 @@
 
 - (void)downloadButtonClicked:(UIButton *)button
 {
-    NSLog(@"下载按钮点击");
     if ([_playerViewController.delegate respondsToSelector:@selector(playerWillDownloadMedia)]) {
         [_playerViewController.delegate playerWillDownloadMedia];
+        button.selected = YES;
     }
 }
 
@@ -288,9 +309,9 @@
 
 - (void)collectButtonClicked:(UIButton *)button
 {
-    NSLog(@"收藏按钮点击");
     if ([_playerViewController.delegate respondsToSelector:@selector(playerWillCollectMedia)]) {
         [_playerViewController.delegate playerWillCollectMedia];
+        button.selected = YES;
     }
 }
 
@@ -343,6 +364,49 @@
     }
     
     return timeStr;
+}
+
+- (void)startActivityIndicatorAnimation
+{
+    [_activityIndicatorView startAnimating];
+}
+
+- (void)stopActivityIndicatorAnimation
+{
+    [_activityIndicatorView stopAnimating];
+}
+
+- (BOOL)currentCollectStateInPlayer
+{
+    if ([self.playerViewController.datasource respondsToSelector:@selector(collectionStateInPlayerView:)]) {
+        return [self.playerViewController.datasource collectionStateInPlayerView:self.playerViewController];
+    } else{
+        return NO;
+    }
+}
+
+- (BOOL)currentRSSStateInPlayer
+{
+    if ([self.playerViewController.datasource respondsToSelector:@selector(rssStateInPlayerView:)]) {
+        return [self.playerViewController.datasource rssStateInPlayerView:self.playerViewController];
+    } else{
+        return NO;
+    }
+}
+
+- (BOOL)currentDownloadStateInPlayer
+{
+    if ([self.playerViewController.datasource respondsToSelector:@selector(downloadStateInPlayerView:)]) {
+        return [self.playerViewController.datasource downloadStateInPlayerView:self.playerViewController];
+    } else{
+        return NO;
+    }
+}
+
+- (void)refreshBtnState
+{
+    [self.leftPannelView refreshLeftPannelView];
+    [self.buttomPannelView refreshButtomPannelView];
 }
 
 - (void)didReceiveMemoryWarning {

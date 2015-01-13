@@ -46,6 +46,7 @@
             [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache_press.png"] forState:UIControlStateSelected];
             [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache_press.png"] forState:UIControlStateHighlighted];
             [_downloadBtn addTarget:supperViewController action:@selector(downloadButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            _downloadBtn.selected = [self.supperViewController currentDownloadStateInPlayer];
             [self addSubview:_downloadBtn];
             
             _collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -55,6 +56,7 @@
             [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect_press.png"] forState:UIControlStateSelected];
             [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect_press.png"] forState:UIControlStateHighlighted];
             [_collectBtn addTarget:supperViewController action:@selector(collectButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            _collectBtn.selected = [self.supperViewController currentCollectStateInPlayer];
             [self addSubview:_collectBtn];
         }
         
@@ -68,6 +70,12 @@
         [self addSubview:_shareBtn];
     }
     return self;
+}
+
+- (void)refreshLeftPannelView
+{
+    _collectBtn.selected = [self.supperViewController currentCollectStateInPlayer];
+    _downloadBtn.selected = [self.supperViewController currentDownloadStateInPlayer];
 }
 
 -(void)layoutSubviews
