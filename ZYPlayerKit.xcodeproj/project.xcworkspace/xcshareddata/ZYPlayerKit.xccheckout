@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F0435FF9-43DC-4E6E-BB1A-EB9067CD28C4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ZYPlayerKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>20476B14B597EDFCF3319BE90303F2BF5A875134</key>
+		<string>https://github.com/lazyyang/PlayerKits.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ZYPlayerKit.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>20476B14B597EDFCF3319BE90303F2BF5A875134</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lazyyang/PlayerKits.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>20476B14B597EDFCF3319BE90303F2BF5A875134</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>20476B14B597EDFCF3319BE90303F2BF5A875134</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PlayerKits</string>
+		</dict>
+	</array>
+</dict>
+</plist>
