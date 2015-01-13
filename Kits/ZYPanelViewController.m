@@ -45,11 +45,12 @@
 - (void)showPannelView
 {
     self.isPannelHidden = NO;
-    self.leftPannelView.alpha = .7f;
-    self.buttomPannelView.alpha = .7f;
-    self.topPannelView.alpha = .7f;
-    self.rightPannelView.alpha = .7f;
-    self.anthologyListView.alpha = .7f;
+    self.buttomPannelView.hidden = NO;
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        self.leftPannelView.hidden = NO;
+        self.topPannelView.hidden = NO;
+        self.rightPannelView.hidden = NO;
+    }
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self startTime];
 }
@@ -58,12 +59,14 @@
 {
     [self stopTime];
     self.isPannelHidden = YES;
-    self.leftPannelView.alpha = 0;
-    self.buttomPannelView.alpha = 0;
-    self.topPannelView.alpha = 0;
-    self.rightPannelView.alpha = 0;
-    self.anthologyListView.alpha = 0;
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    self.leftPannelView.hidden = YES;
+    self.buttomPannelView.hidden = YES;
+    self.topPannelView.hidden = YES;
+    self.rightPannelView.hidden = YES;
+    self.anthologyListView.hidden = YES;
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
 }
 
 - (void)startTime
@@ -101,7 +104,11 @@
         self.topPannelView.hidden = NO;
         self.rightPannelView.hidden = NO;
         self.leftPannelView.frame = CGRectMake(0, self.view.bounds.size.height/2 - 110.0f/2, 40.0f, 110.0f);
-        self.buttomPannelView.frame = CGRectMake(0, self.view.bounds.size.height - 62.0f, self.view.bounds.size.width, 62.0f);
+        if ([_playerViewController isLiveType]) {
+            self.buttomPannelView.frame = CGRectMake(0, self.view.bounds.size.height - 40.0f, self.view.bounds.size.width, 40.0f);
+        } else{
+            self.buttomPannelView.frame = CGRectMake(0, self.view.bounds.size.height - 62.0f, self.view.bounds.size.width, 62.0f);
+        }
         if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)) {
             self.topPannelView.frame = CGRectMake(0, 0.0f, self.view.bounds.size.width, 60.0f);
         } else{
@@ -246,6 +253,14 @@
         [self.view addSubview:_anthologyListView];
     } else{
         _anthologyListView.hidden = !_anthologyListView.hidden;
+    }
+    
+    if (_anthologyListView.hidden == NO) {
+        self.leftPannelView.hidden = YES;
+        self.buttomPannelView.hidden = YES;
+        self.rightPannelView.hidden = YES;
+    } else{
+        [self hiddenPannelView];
     }
 }
 

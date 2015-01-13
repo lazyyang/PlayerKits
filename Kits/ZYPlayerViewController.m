@@ -28,6 +28,14 @@
 
 @implementation ZYPlayerViewController
 
+- (void)dealloc
+{
+    if (self.timeObserver) {
+        [self.player removeTimeObserver:self.timeObserver];
+    }
+    [self removePlayerItemObserver:_playerItem];
+}
+
 - (instancetype)initWithMeidaType:(MeidaType)mediaType
 {
     if (self = [super init]) {
@@ -71,9 +79,7 @@
     if (!_asset) {
         [self setPlayerItem:nil];
     }
-    
 
-    
     NSArray *keys = @[@"tracks", @"playable", @"duration"];
     
     [_asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
@@ -186,6 +192,9 @@
 
 - (void)updateStatus:(AVPlayerItem *)playerItem
 {
+    if (self.mediaType == LiveType) {
+        return;
+    }
     [self.player removeTimeObserver:self.timeObserver];
     self.timeObserver = nil;
     __weak typeof(&*self) weakSelf = self;
@@ -247,6 +256,15 @@
 - (void)startMedia
 {
     [self.player play];
+}
+
+- (BOOL)isLiveType
+{
+    if (self.mediaType == LiveType) {
+        return YES;
+    } else{
+        return NO;
+    }
 }
 
 - (void)seekToTimeWithValue:(float)value completion:(void (^)(void))completion

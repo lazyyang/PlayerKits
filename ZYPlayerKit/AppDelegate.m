@@ -8,11 +8,9 @@
 
 #import "AppDelegate.h"
 #import "MyViewController.h"
+#import "RoootViewController.h"
 
 @interface AppDelegate ()
-
-
-
 
 @end
 
@@ -23,9 +21,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     MyViewController *vc = [[MyViewController alloc] init];
+    vc.title = @"直播";
     
-    UIViewController *vc2 = [[UIViewController alloc] init];
-    vc2.view.backgroundColor = [UIColor redColor];
+    RoootViewController *vc2 = [[RoootViewController alloc] init];
+    vc2.title = @"点播";
     
     _tabBar = [[UITabBarController alloc] init];
     _tabBar.viewControllers = [NSArray arrayWithObjects:vc,vc2,nil];

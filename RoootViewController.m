@@ -1,21 +1,21 @@
 //
-//  MyViewController.m
+//  RoootViewController.m
 //  ZYPlayerKit
 //
-//  Created by YangZheng on 14/11/20.
-//  Copyright (c) 2014年 YangZheng. All rights reserved.
+//  Created by YangZheng on 15/1/13.
+//  Copyright (c) 2015年 YangZheng. All rights reserved.
 //
 
-#import "MyViewController.h"
+#import "RoootViewController.h"
 #import "AppDelegate.h"
 
-@interface MyViewController ()<PlayerEventsDelegate,PlayerDataSource>
+@interface RoootViewController ()<PlayerEventsDelegate,PlayerDataSource>
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @end
 
-@implementation MyViewController
+@implementation RoootViewController
 
 
 -(void)makeTabBarHidden:(BOOL)hide {
@@ -51,14 +51,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    _playerVC = [[ZYPlayerViewController alloc] initWithMeidaType:LiveType];
+    _playerVC = [[ZYPlayerViewController alloc] initWithMeidaType:VideoType];
     _playerVC.view.frame = CGRectMake(0, 40, self.view.bounds.size.width, 180);
     _playerVC.delegate = self;
     _playerVC.datasource = self;
     
     [self addChildViewController:_playerVC];
     [self.view addSubview:_playerVC.view];
-    [_playerVC playFromSeconds:nil withURL:[NSURL URLWithString:@"http://live.3gv.ifeng.com/zhongwen.m3u8"]];
+    [_playerVC playFromSeconds:nil withURL:[NSURL URLWithString:@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4"]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -87,19 +87,20 @@
 - (void)playerWillPlayNextMedia
 {
     NSLog(@"播放下一条");
-    NSArray *array = @[@"http://live.3gv.ifeng.com/zhongwen.m3u8", @"http://live.3gv.ifeng.com/zixun.m3u8",@"http://live.3gv.ifeng.com/cctv13.m3u8",@"http://live.3gv.ifeng.com/ahws.m3u8"];
+    NSArray *array = @[@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/15/2803309-102-1457.mp4"];
     _currentIndex ++;
     if (_currentIndex >= 3) {
         _currentIndex = 0;
     }
     NSString *url = [array objectAtIndex:_currentIndex];
     [_playerVC playFromSeconds:nil withURL:[NSURL URLWithString:url]];
-
+    
 }
 
 - (void)anthologyListView:(ZYAnthologyListView *)anthologyListView didSelectedRowAtIndex:(NSInteger)index
 {
-    NSArray *array = @[@"http://live.3gv.ifeng.com/zhongwen.m3u8", @"http://live.3gv.ifeng.com/zixun.m3u8",@"http://live.3gv.ifeng.com/cctv13.m3u8",@"http://live.3gv.ifeng.com/zhongwen.m3u8",@"http://live.3gv.ifeng.com/ahws.m3u8",@"http://live.3gv.ifeng.com/cctv13.m3u8"];
+    NSLog(@"选择了第%d行",index);
+    NSArray *array = @[@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/15/2803309-102-1457.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4"];
     NSString *url = [array objectAtIndex:index];
     [_playerVC playFromSeconds:nil withURL:[NSURL URLWithString:url]];
 }
@@ -148,13 +149,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

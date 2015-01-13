@@ -8,6 +8,7 @@
 
 #import "ZYButtomPannelView.h"
 #import "ZYPanelViewController.h"
+#import "ZYPlayerViewController.h"
 
 @interface ZYButtomPannelView ()
 
@@ -26,10 +27,30 @@
         
         _supperViewController = supperViewController;
         
-        _progessSlider = [[ZYSlider alloc] initWithFrame:frame];
-        [_progessSlider addTarget:_supperViewController action:@selector(progessSliderValueChangedEnd:) forControlEvents:UIControlEventTouchUpInside];
-        [_progessSlider addTarget:_supperViewController action:@selector(progessSliderValueChangedBegin:) forControlEvents:UIControlEventTouchDown];
-        [self addSubview:_progessSlider];
+        if (![_supperViewController.playerViewController isLiveType]) {
+            _progessSlider = [[ZYSlider alloc] initWithFrame:frame];
+            [_progessSlider addTarget:_supperViewController action:@selector(progessSliderValueChangedEnd:) forControlEvents:UIControlEventTouchUpInside];
+            [_progessSlider addTarget:_supperViewController action:@selector(progessSliderValueChangedBegin:) forControlEvents:UIControlEventTouchDown];
+            [self addSubview:_progessSlider];
+            
+            _timeLabel = [[UILabel alloc] init];
+            _timeLabel.backgroundColor = [UIColor clearColor];
+            _timeLabel.textColor = [UIColor whiteColor];
+            _timeLabel.text = @"00:00/00:00";
+            [self addSubview:_timeLabel];
+            
+            _playNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [_playNextButton setImage:[UIImage imageNamed:@"landscape_next.png"] forState:UIControlStateNormal];
+            [_playNextButton setImage:[UIImage imageNamed:@"landscape_next_press.png"] forState:UIControlStateHighlighted];
+            [_playNextButton addTarget:_supperViewController action:@selector(playNext:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:_playNextButton];
+            
+            _rssButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [_rssButton addTarget:_supperViewController action:@selector(rssBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [_rssButton setImage:[UIImage imageNamed:@"landscape_subscribe.png"] forState:UIControlStateNormal];
+            [self addSubview:_rssButton];
+        }
+
         
         _playOrPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playOrPauseButton.tag = 1;//1表示播放状态
@@ -42,18 +63,6 @@
         [_fullScreenBtn setImage:[UIImage imageNamed:@"landscape_fullscreen_press.png"] forState:UIControlStateHighlighted];
         [_fullScreenBtn addTarget:_supperViewController action:@selector(fullScreen:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_fullScreenBtn];
-        
-        _playNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playNextButton setImage:[UIImage imageNamed:@"landscape_next.png"] forState:UIControlStateNormal];
-        [_playNextButton setImage:[UIImage imageNamed:@"landscape_next_press.png"] forState:UIControlStateHighlighted];
-        [_playNextButton addTarget:_supperViewController action:@selector(playNext:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_playNextButton];
-        
-        _timeLabel = [[UILabel alloc] init];
-        _timeLabel.backgroundColor = [UIColor clearColor];
-        _timeLabel.textColor = [UIColor whiteColor];
-        _timeLabel.text = @"01:14/03:28";
-        [self addSubview:_timeLabel];
         
         _lockButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_lockButton setImage:[UIImage imageNamed:@"landscape_unlock.png"] forState:UIControlStateNormal];
@@ -71,11 +80,6 @@
         [_audioButton setImage:[UIImage imageNamed:@"landscape_audio.png"] forState:UIControlStateNormal];
         [_audioButton addTarget:_supperViewController action:@selector(changeMediaType:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_audioButton];
-        
-        _rssButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_rssButton addTarget:_supperViewController action:@selector(rssBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_rssButton setImage:[UIImage imageNamed:@"landscape_subscribe.png"] forState:UIControlStateNormal];
-        [self addSubview:_rssButton];
 
     }
     return self;

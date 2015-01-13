@@ -8,6 +8,7 @@
 
 #import "ZYLeftPannelView.h"
 #import "ZYPanelViewController.h"
+#import "ZYPlayerViewController.h"
 
 @interface ZYLeftPannelView ()
 
@@ -26,33 +27,38 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor clearColor];
         self.alpha = 0.7f;
         _supperViewController = supperViewController;
         
-        _downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _downloadBtn.showsTouchWhenHighlighted = YES;
-        [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache.png"] forState:UIControlStateNormal];
-        [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache_press.png"] forState:UIControlStateSelected];
-        [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache_press.png"] forState:UIControlStateHighlighted];
-        [_downloadBtn addTarget:supperViewController action:@selector(downloadButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_downloadBtn];
+        if (![_supperViewController.playerViewController isLiveType]) {
+            _downloadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            _downloadBtn.showsTouchWhenHighlighted = YES;
+            _downloadBtn.backgroundColor = [UIColor blackColor];
+            [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache.png"] forState:UIControlStateNormal];
+            [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache_press.png"] forState:UIControlStateSelected];
+            [_downloadBtn setImage:[UIImage imageNamed:@"landscape_cache_press.png"] forState:UIControlStateHighlighted];
+            [_downloadBtn addTarget:supperViewController action:@selector(downloadButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:_downloadBtn];
+            
+            _collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            _collectBtn.showsTouchWhenHighlighted = YES;
+            _collectBtn.backgroundColor = [UIColor blackColor];
+            [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect.png"] forState:UIControlStateNormal];
+            [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect_press.png"] forState:UIControlStateSelected];
+            [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect_press.png"] forState:UIControlStateHighlighted];
+            [_collectBtn addTarget:supperViewController action:@selector(collectButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:_collectBtn];
+        }
         
         _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _shareBtn.backgroundColor = [UIColor blackColor];
         _shareBtn.showsTouchWhenHighlighted = YES;
         [_shareBtn setImage:[UIImage imageNamed:@"landscape_share.png"] forState:UIControlStateNormal];
         [_shareBtn setImage:[UIImage imageNamed:@"landscape_share_press.png"] forState:UIControlStateSelected];
         [_shareBtn setImage:[UIImage imageNamed:@"landscape_share_press.png"] forState:UIControlStateHighlighted];
         [_shareBtn addTarget:supperViewController action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_shareBtn];
-        
-        _collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _collectBtn.showsTouchWhenHighlighted = YES;
-        [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect.png"] forState:UIControlStateNormal];
-        [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect_press.png"] forState:UIControlStateSelected];
-        [_collectBtn setImage:[UIImage imageNamed:@"landscape_collect_press.png"] forState:UIControlStateHighlighted];
-        [_collectBtn addTarget:supperViewController action:@selector(collectButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_collectBtn];
     }
     return self;
 }

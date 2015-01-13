@@ -216,4 +216,9 @@ typedef enum
  */
 - (void)seekToTimeWithValue:(float)value completion:(void (^)(void))completion;
 
+/**
+ *  是否是直播
+ */
+- (BOOL)isLiveType;
+
 @end

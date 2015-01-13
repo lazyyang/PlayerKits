@@ -36,6 +36,7 @@
 		DF3BA1CB1A3E8E4B00F25B08 /* landscape_subscribe.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3BA1C91A3E8E4B00F25B08 /* landscape_subscribe.png */; };
 		DF3BA1D11A3EE13900F25B08 /* landscape_mute.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3BA1D01A3EE13900F25B08 /* landscape_mute.png */; };
 		DF3BA1D31A3EE15400F25B08 /* landscape_sound.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3BA1D21A3EE15400F25B08 /* landscape_sound.png */; };
+		DF3FB1B91A64F9FA0030E706 /* RoootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF3FB1B71A64F9FA0030E706 /* RoootViewController.m */; };
 		DF53599B1A1DE6F100A2D9B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DF53599A1A1DE6F100A2D9B3 /* main.m */; };
 		DF53599E1A1DE6F100A2D9B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF53599D1A1DE6F100A2D9B3 /* AppDelegate.m */; };
 		DF5359A01A1DE6F100A2D9B3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF53599F1A1DE6F100A2D9B3 /* Images.xcassets */; };
@@ -113,6 +114,8 @@
 		DF3BA1C91A3E8E4B00F25B08 /* landscape_subscribe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape_subscribe.png; sourceTree = "<group>"; };
 		DF3BA1D01A3EE13900F25B08 /* landscape_mute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape_mute.png; sourceTree = "<group>"; };
 		DF3BA1D21A3EE15400F25B08 /* landscape_sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape_sound.png; sourceTree = "<group>"; };
+		DF3FB1B61A64F9FA0030E706 /* RoootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoootViewController.h; path = ../RoootViewController.h; sourceTree = "<group>"; };
+		DF3FB1B71A64F9FA0030E706 /* RoootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoootViewController.m; path = ../RoootViewController.m; sourceTree = "<group>"; };
 		DF5359951A1DE6F100A2D9B3 /* ZYPlayerKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYPlayerKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5359991A1DE6F100A2D9B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF53599A1A1DE6F100A2D9B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				DF5359981A1DE6F100A2D9B3 /* Supporting Files */,
 				DFF2F7FC1A1DFFD30087630A /* MyViewController.h */,
 				DFF2F7FD1A1DFFD30087630A /* MyViewController.m */,
+				DF3FB1B61A64F9FA0030E706 /* RoootViewController.h */,
+				DF3FB1B71A64F9FA0030E706 /* RoootViewController.m */,
 			);
 			path = ZYPlayerKit;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 			files = (
 				DF2AE3A71A411C5700349BB2 /* ZYAnthologyListView.m in Sources */,
 				DFF2F8071A1E29EF0087630A /* ZYPlayerView.m in Sources */,
+				DF3FB1B91A64F9FA0030E706 /* RoootViewController.m in Sources */,
 				DF2AE3A01A4042BA00349BB2 /* ZYBitRateListView.m in Sources */,
 				DF07D1421A256DA5004AC591 /* ZYPlayerViewController.m in Sources */,
 				DFF2F8061A1E29EF0087630A /* ZYGesture.m in Sources */,
