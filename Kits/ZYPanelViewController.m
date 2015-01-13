@@ -40,6 +40,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:kSystemVolumeDidChanged
                                                   object:nil];
+    self.leftPannelView = nil;
+    self.buttomPannelView = nil;
+    self.topPannelView = nil;
+    self.rightPannelView = nil;
+    self.anthologyListView = nil;
+    self.gestureView = nil;
 }
 
 - (void)showPannelView

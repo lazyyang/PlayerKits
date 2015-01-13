@@ -17,6 +17,19 @@
 
 @implementation ZYButtomPannelView
 
+- (void)dealloc
+{
+    self.progessSlider = nil;
+    self.playOrPauseButton = nil;
+    self.playNextButton = nil;
+    self.timeLabel = nil;
+    self.rssButton = nil;
+    self.audioButton = nil;
+    self.bitRateButton = nil;
+    self.fullScreenBtn = nil;
+    self.lockButton = nil;
+}
+
 - (id)initWithFrame:(CGRect)frame WithSupperViewController:(id)supperViewController
 {
     self = [super initWithFrame:frame];

@@ -19,6 +19,12 @@
 
 @implementation ZYAnthologyListView
 
+-(void)dealloc
+{
+    self.tableView = nil;
+    self.dataArray = nil;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 45.0f;

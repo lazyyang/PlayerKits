@@ -16,6 +16,11 @@
 
 @implementation ZYRightPannelView
 
+- (void)dealloc
+{
+    self.volumeSlider = nil;
+    self.volumeIndicateView = nil;
+}
 
 - (id)initWithFrame:(CGRect)frame WithSupperViewController:(id)supperViewController
 {

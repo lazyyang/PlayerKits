@@ -21,6 +21,13 @@
 
 @implementation ZYTopPannelView
 
+- (void)dealloc
+{
+    self.backButton = nil;
+    self.titleLabel = nil;
+    self.anthologyButton = nil;
+}
+
 - (id)initWithFrame:(CGRect)frame WithSupperViewController:(id)supperViewController
 {
     self = [super initWithFrame:frame];

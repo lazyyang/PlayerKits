@@ -16,6 +16,11 @@
 
 @implementation ZYLoadingVIewController
 
+- (void)dealloc
+{
+    self.imageView = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

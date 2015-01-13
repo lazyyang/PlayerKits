@@ -22,6 +22,13 @@
 
 @implementation ZYLeftPannelView
 
+- (void)dealloc
+{
+    self.downloadBtn = nil;
+    self.shareBtn = nil;
+    self.collectBtn = nil;
+}
+
 - (id)initWithFrame:(CGRect)frame WithSupperViewController:(id)supperViewController
 {
     self = [super initWithFrame:frame];

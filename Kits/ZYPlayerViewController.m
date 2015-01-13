@@ -33,7 +33,17 @@
     if (self.timeObserver) {
         [self.player removeTimeObserver:self.timeObserver];
     }
-    [self removePlayerItemObserver:_playerItem];
+    //[self removePlayerItemObserver:_playerItem];
+    self.player = nil;
+    self.playerItem = nil;
+    self.playerView = nil;
+    self.asset = nil;
+    [_pannelViewController removeFromParentViewController];
+    self.pannelViewController = nil;
+    [_loadingViewController removeFromParentViewController];
+    self.loadingViewController = nil;
+    self.delegate = nil;
+    self.datasource = nil;
 }
 
 - (instancetype)initWithMeidaType:(MeidaType)mediaType
