@@ -99,11 +99,16 @@
 
 - (void)anthologyListView:(ZYAnthologyListView *)anthologyListView didSelectedRowAtIndex:(NSInteger)index
 {
-    NSLog(@"选择了第%d行",index);
+    NSLog(@"选择了第%ld行",(long)index);
     self.currentIndex = index;
     NSArray *array = @[@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/15/2803309-102-1457.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/06/13/1986101-102-1518.mp4",@"http://ips.ifeng.com/video19.ifeng.com/video09/2014/12/16/2808803-102-1342.mp4"];
     NSString *url = [array objectAtIndex:index];
     [_playerVC playFromSeconds:nil withURL:[NSURL URLWithString:url]];
+}
+
+- (void)bitRateListView:(ZYBitRateListView *)bitRateListView didSelectedRowAtIndex:(NSInteger)index
+{
+    
 }
 
 - (void)playerWillRssMedia
@@ -162,6 +167,21 @@
     //返回rss状态
     NSArray *rssDownloadArray = @[@YES,@YES,@NO,@NO,@NO,@YES];
     return [rssDownloadArray[_currentIndex] boolValue];
+}
+
+- (NSUInteger)currentIndexInPlayer:(ZYPlayerViewController *)player
+{
+    return self.currentIndex;
+}
+
+- (NSArray *)bitRateListIndexPlayer:(ZYPlayerViewController *)player
+{
+    return nil;
+}
+
+- (BitRateType)currentBitRateIndexPlayer:(ZYPlayerViewController *)player
+{
+    return 0;
 }
 
 - (void)didReceiveMemoryWarning {

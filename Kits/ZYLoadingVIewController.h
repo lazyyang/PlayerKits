@@ -10,4 +10,12 @@
 
 @interface ZYLoadingVIewController : UIViewController
 
+@property (nonatomic, strong) UIActivityIndicatorView *actiView;
+
+@property (nonatomic, strong) UIImageView *logoImgView;
+
+@property (nonatomic, strong) UILabel *titleLabel;
+
+@property (nonatomic, strong) UILabel *indicateLabel;
+
 @end
